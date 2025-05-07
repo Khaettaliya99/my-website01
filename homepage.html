@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>หน้าแรก - เว็บไซต์ของแคท</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f0f0f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #002060;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+
+    .main-content {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .main-content h2 {
+      color: #002060;
+      margin-bottom: 1rem;
+    }
+
+    .main-content p {
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background-color: #002060;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>เว็บไซต์ของแคท</strong></div>
+    <nav>
+  <ul>
+    <li><a href="#">หน้าแรก</a></li>
+    <li><a href="#about">เกี่ยวกับ</a></li>
+    <li><a href="product.html">สินค้า</a></li>
+    <li><a href="#contact">ติดต่อ</a></li>
+    <li><a href="#login">เข้าสู่ระบบ</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <section class="hero">
+    ยินดีต้อนรับสู่เว็บไซต์ของแคท
+  </section>
+
+  <section class="main-content" id="about">
+    <h2>เกี่ยวกับเรา</h2>
+    <p>
+      ที่นี่เราจำหน่ายอุปกรณ์และเครื่องมือช่างคุณภาพ เช่น สว่านไฟฟ้า เครื่องมือไฟฟ้า และสินค้าต่าง ๆ อีกมากมายในราคายุติธรรม พร้อมบริการหลังการขายจากทีมงานมืออาชีพ
+    </p>
+  </section>
+
+  <section class="promotions main-content">
+    <h2>โปรโมชั่นพิเศษ</h2>
+    <p>ซื้อสินค้าครบ 5,000 บาท ส่งฟรีทั่วประเทศ!</p>
+  </section>
+
+  <section class="news main-content">
+    <h2>ข่าวสารล่าสุด</h2>
+    <ul style="text-align: left; max-width: 700px; margin: 0 auto;">
+      <li>📢 เปิดตัวสินค้าใหม่เดือนนี้: สว่านไร้สายรุ่นพรีเมียม</li>
+      <li>📅 แคทจะไลฟ์สดแนะนำสินค้า ทุกวันศุกร์ เวลา 20:00 น.</li>
+      <li>🎁 แจกคูปองส่วนลดพิเศษทุกวันอาทิตย์!</li>
+    </ul>
+  </section>
+
+  <section class="testimonials main-content">
+    <h2>รีวิวจากลูกค้า</h2>
+    <blockquote style="font-style: italic; color: #555;">“สินค้าคุณภาพดี ส่งเร็วมาก แม่ค้าใจดีสุด ๆ เลยค่ะ” – คุณก้อย</blockquote>
+    <blockquote style="font-style: italic; color: #555;">“ใช้แล้วทนทาน แข็งแรง บริการหลังการขายดีมากครับ” – คุณต่อ</blockquote>
+  </section>
+
+  <section class="contact-info main-content" id="contact">
+    <h2>ติดต่อเรา</h2>
+    <p>โทร: 08X-XXX-XXXX | อีเมล: katshop@example.com</p>
+    <p>Facebook: facebook.com/katshop | Line: @kattools</p>
+  </section>
+
+  <footer>
+    &copy; 2025 เว็บไซต์ของแคท - สงวนลิขสิทธิ์
+  </footer>
+</body>
+</html>

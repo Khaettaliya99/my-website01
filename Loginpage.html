@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>เข้าสู่ระบบ / สมัครสมาชิก</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f0f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 4rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #002060;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #002060;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0033a0;
+    }
+
+    .toggle-section {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .toggle-section a {
+      color: #002060;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- แบบฟอร์มเข้าสู่ระบบ -->
+  <div class="container" id="loginForm">
+    <h2>เข้าสู่ระบบ</h2>
+    <form>
+      <label for="email">อีเมล</label>
+      <input type="email" id="email" placeholder="กรอกอีเมล" required />
+
+      <label for="password">รหัสผ่าน</label>
+      <input type="password" id="password" placeholder="กรอกรหัสผ่าน" required />
+
+      <button type="submit">เข้าสู่ระบบ</button>
+    </form>
+    <div class="toggle-section">
+      ยังไม่มีบัญชี? <a onclick="toggleForm()">สมัครสมาชิก</a>
+    </div>
+  </div>
+
+  <!-- แบบฟอร์มสมัครสมาชิก -->
+  <div class="container" id="registerForm" style="display: none;">
+    <h2>สมัครสมาชิก</h2>
+    <form id="register-form" onsubmit="submitForm(event)">
+      <label for="fname">ชื่อ</label>
+      <input type="text" id="fname" placeholder="กรอกชื่อ" required />
+
+      <label for="lname">นามสกุล</label>
+      <input type="text" id="lname" placeholder="กรอกนามสกุล" required />
+
+      <label for="phone">เบอร์โทร</label>
+      <input type="tel" id="phone" placeholder="กรอกเบอร์โทรศัพท์" required />
+
+      <label for="regEmail">อีเมล</label>
+      <input type="email" id="regEmail" placeholder="กรอกอีเมล" required />
+
+      <label for="username">ชื่อผู้ใช้งาน</label>
+      <input type="text" id="username" placeholder="ตั้งชื่อผู้ใช้" required />
+
+      <label for="regPassword">รหัสผ่าน</label>
+      <input type="password" id="regPassword" placeholder="ตั้งรหัสผ่าน" required />
+
+      <button type="submit">สมัครสมาชิก</button>
+    </form>
+    <div class="toggle-section">
+      มีบัญชีแล้ว? <a onclick="toggleForm()">เข้าสู่ระบบ</a>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwmd4hK6kErmb8wP4zxz3lFuegOhmbyBJZ9n4A8SdUZrFTR9frU7Sb3v2yCUKG3PY1_Ew/exec';
+  
+    function toggleForm() {
+      const login = document.getElementById('loginForm');
+      const register = document.getElementById('registerForm');
+      login.style.display = login.style.display === 'none' ? 'block' : 'none';
+      register.style.display = register.style.display === 'none' ? 'block' : 'none';
+    }
+  
+    function submitForm(event) {
+      event.preventDefault();
+      const data = {
+        fname: document.getElementById("fname").value,
+        lname: document.getElementById("lname").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("regEmail").value,
+        username: document.getElementById("username").value,
+        password: document.getElementById("regPassword").value
+      };
+  
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        alert("✅ สมัครสมาชิกเรียบร้อยแล้ว!");
+        document.querySelector("#registerForm form").reset();
+        toggleForm();
+      })
+      .catch(error => {
+        console.error("❌ เกิดข้อผิดพลาด:", error);
+        alert("❌ ไม่สามารถส่งข้อมูลได้");
+      });
+    }
+  </script>
+  
+
+</body>
+</html>
