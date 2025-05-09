@@ -1,3 +1,4 @@
+<!-- ✅ product-management.html พร้อมช่องรายละเอียดสินค้า -->
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -101,6 +102,7 @@
         <tr>
           <th>รหัสสินค้า</th>
           <th>ชื่อ</th>
+          <th>รายละเอียด</th>
           <th>ราคา</th>
           <th>คงเหลือ</th>
           <th>เลือกรูปภาพ</th>
@@ -111,6 +113,7 @@
         <tr style="background: #e8f5e9;">
           <td><input type="text" id="newProductId"></td>
           <td><input type="text" id="newProductName"></td>
+          <td><input type="text" id="newProductDesc"></td>
           <td><input type="number" id="newProductPrice"></td>
           <td><input type="number" id="newProductStock"></td>
           <td><input type="file" id="newProductImage" accept="image/*"></td>
@@ -137,11 +140,12 @@
     async function saveProduct() {
       const productId = document.getElementById("newProductId").value.trim();
       const productName = document.getElementById("newProductName").value.trim();
+      const productDesc = document.getElementById("newProductDesc").value.trim();
       const productPrice = document.getElementById("newProductPrice").value.trim();
       const productStock = document.getElementById("newProductStock").value.trim();
       const imageFile = document.getElementById("newProductImage").files[0];
 
-      if (!productId || !productName || !productPrice || !productStock || !imageFile) {
+      if (!productId || !productName || !productDesc || !productPrice || !productStock || !imageFile) {
         alert("❌ กรุณากรอกข้อมูลให้ครบรวมถึงเลือกรูปภาพ");
         return;
       }
@@ -151,6 +155,7 @@
       formData.append("file", imageFile);
       formData.append("product_id", productId);
       formData.append("product_name", productName);
+      formData.append("product_desc", productDesc);
       formData.append("product_price", productPrice);
       formData.append("product_stock", productStock);
 
@@ -164,6 +169,7 @@
 
       document.getElementById("newProductId").value = "";
       document.getElementById("newProductName").value = "";
+      document.getElementById("newProductDesc").value = "";
       document.getElementById("newProductPrice").value = "";
       document.getElementById("newProductStock").value = "";
       document.getElementById("newProductImage").value = "";
