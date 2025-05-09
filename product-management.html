@@ -1,4 +1,4 @@
-<!-- ✅ product-management.html พร้อมช่องรายละเอียดสินค้า -->
+<!-- ✅ product-management.html พร้อม base64 และช่องรายละเอียดสินค้า -->
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -150,33 +150,39 @@
         return;
       }
 
-      const formData = new FormData();
-      formData.append("action", "upload_image");
-      formData.append("file", imageFile);
-      formData.append("product_id", productId);
-      formData.append("product_name", productName);
-      formData.append("product_desc", productDesc);
-      formData.append("product_price", productPrice);
-      formData.append("product_stock", productStock);
+      const reader = new FileReader();
+      reader.onloadend = async function () {
+        const base64data = reader.result;
 
-      const response = await fetch(uploadURL, {
-        method: "POST",
-        body: formData
-      });
+        const formData = new FormData();
+        formData.append("action", "upload_image");
+        formData.append("product_id", productId);
+        formData.append("product_name", productName);
+        formData.append("product_desc", productDesc);
+        formData.append("product_price", productPrice);
+        formData.append("product_stock", productStock);
+        formData.append("image_base64", base64data);
 
-      const result = await response.text();
-      console.log("Upload result:", result);
+        const response = await fetch(uploadURL, {
+          method: "POST",
+          body: formData
+        });
 
-      document.getElementById("newProductId").value = "";
-      document.getElementById("newProductName").value = "";
-      document.getElementById("newProductDesc").value = "";
-      document.getElementById("newProductPrice").value = "";
-      document.getElementById("newProductStock").value = "";
-      document.getElementById("newProductImage").value = "";
+        const result = await response.text();
+        console.log("Upload result:", result);
 
-      const toast = document.getElementById("toast");
-      toast.style.visibility = "visible";
-      setTimeout(() => toast.style.visibility = "hidden", 3000);
+        document.getElementById("newProductId").value = "";
+        document.getElementById("newProductName").value = "";
+        document.getElementById("newProductDesc").value = "";
+        document.getElementById("newProductPrice").value = "";
+        document.getElementById("newProductStock").value = "";
+        document.getElementById("newProductImage").value = "";
+
+        const toast = document.getElementById("toast");
+        toast.style.visibility = "visible";
+        setTimeout(() => toast.style.visibility = "hidden", 3000);
+      };
+      reader.readAsDataURL(imageFile);
     }
 
     function goBack() {
