@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หน้าแรกผู้ใช้งาน</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #002060;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hero {
+      background: url('https://via.placeholder.com/1200x300?text=Welcome+Banner') no-repeat center center/cover;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #002060;
+      margin-bottom: 1rem;
+    }
+    .card {
+      padding: 1.5rem;
+      background-color: #e3f2fd;
+      margin-bottom: 1rem;
+      border-left: 5px solid #002060;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #002060;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>ระบบของแคท</strong></div>
+    <div>👤 <span id="userNameTop">...</span> | 🟢 ออนไลน์</div>
+  </header>
+
+  <section class="hero" id="welcomeSection">
+    ยินดีต้อนรับ
+  </section>
+
+  <div class="container">
+    <h2>ข้อมูลผู้ใช้งาน</h2>
+    <div class="card">
+      <p><strong>ชื่อผู้ใช้:</strong> <span id="userNameDisplay"></span></p>
+      <p><strong>บทบาท:</strong> <span id="userRoleDisplay"></span></p>
+      <p><strong>สถานะ:</strong> 🟢 ออนไลน์</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 เว็บไซต์ของแคท - สงวนลิขสิทธิ์
+  </footer>
+
+  <script>
+    const userName = localStorage.getItem("userName") || "Guest";
+    const userRole = localStorage.getItem("userRole") || "user";
+
+    document.getElementById("userNameTop").textContent = userName;
+    document.getElementById("userNameDisplay").textContent = userName;
+    document.getElementById("userRoleDisplay").textContent = userRole;
+
+    document.getElementById("welcomeSection").innerText = `ยินดีต้อนรับ คุณ${userName}`;
+
+    if (userName === "Guest") {
+      alert("กรุณาเข้าสู่ระบบก่อน!");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
