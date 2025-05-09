@@ -177,7 +177,7 @@
 
       try {
         const data = JSON.parse(result);
-        if (data.email) {
+        if (data.email && data.role) {
           localStorage.setItem("userEmail", data.email);
           localStorage.setItem("userName", data.username);
           localStorage.setItem("userRole", data.role);
