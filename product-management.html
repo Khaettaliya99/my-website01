@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>จัดการสินค้า - แอดมิน</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f0f0f5;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #002060;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    h2 {
+      color: #002060;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      background: white;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #002060;
+      color: white;
+    }
+    input {
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-back-fixed {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #607d8b;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      z-index: 999;
+    }
+    #toast {
+      visibility: hidden;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>เว็บไซต์ของแคท</strong>
+    <div class="admin-status">🟢 <span id="adminUser">กำลังโหลด...</span></div>
+  </header>
+
+  <div class="container">
+    <h2>🛠 จัดการสินค้า</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รหัสสินค้า</th>
+          <th>ชื่อ</th>
+          <th>ราคา</th>
+          <th>คงเหลือ</th>
+          <th>เลือกรูปภาพ</th>
+          <th>จัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #e8f5e9;">
+          <td><input type="text" id="newProductId"></td>
+          <td><input type="text" id="newProductName"></td>
+          <td><input type="number" id="newProductPrice"></td>
+          <td><input type="number" id="newProductStock"></td>
+          <td><input type="file" id="newProductImage" accept="image/*"></td>
+          <td><button onclick="saveProduct()">บันทึก</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button class="btn-back-fixed" onclick="goBack()">⬅️ กลับหน้าหลัก</button>
+  <div id="toast">✅ เพิ่มสินค้าแล้ว</div>
+
+  <script>
+    const uploadURL = "https://script.google.com/macros/s/AKfycbz35pjSs9yikYSIqxvDXn99B-zJwVk8EiwG_dJ3WaidnBI_L33qvvxFOOtEzmAfcfAd7A/exec";
+    const adminName = localStorage.getItem("userName") || "Unknown";
+    const role = localStorage.getItem("userRole");
+
+    if (role !== "admin") {
+      alert("หน้านี้สำหรับแอดมินเท่านั้น");
+      window.location.href = "index.html";
+    }
+    document.getElementById("adminUser").textContent = adminName;
+
+    async function saveProduct() {
+      const productId = document.getElementById("newProductId").value.trim();
+      const productName = document.getElementById("newProductName").value.trim();
+      const productPrice = document.getElementById("newProductPrice").value.trim();
+      const productStock = document.getElementById("newProductStock").value.trim();
+      const imageFile = document.getElementById("newProductImage").files[0];
+
+      if (!productId || !productName || !productPrice || !productStock || !imageFile) {
+        alert("❌ กรุณากรอกข้อมูลให้ครบรวมถึงเลือกรูปภาพ");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("action", "upload_image");
+      formData.append("file", imageFile);
+      formData.append("product_id", productId);
+      formData.append("product_name", productName);
+      formData.append("product_price", productPrice);
+      formData.append("product_stock", productStock);
+
+      const response = await fetch(uploadURL, {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await response.text();
+      console.log("Upload result:", result);
+
+      document.getElementById("newProductId").value = "";
+      document.getElementById("newProductName").value = "";
+      document.getElementById("newProductPrice").value = "";
+      document.getElementById("newProductStock").value = "";
+      document.getElementById("newProductImage").value = "";
+
+      const toast = document.getElementById("toast");
+      toast.style.visibility = "visible";
+      setTimeout(() => toast.style.visibility = "hidden", 3000);
+    }
+
+    function goBack() {
+      window.location.href = "admin.html";
+    }
+  </script>
+</body>
+</html>

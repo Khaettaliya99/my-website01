@@ -3,163 +3,190 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>เข้าสู่ระบบ / สมัครสมาชิก</title>
+  <title>หน้าแรก - เว็บไซต์ของแคท</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f0f0f5;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .container {
-      max-width: 500px;
-      margin: 4rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      color: #002060;
-      margin-bottom: 1.5rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    label {
-      font-weight: bold;
+    body {
+      background-color: #f0f0f5;
       color: #333;
     }
 
-    input {
-      padding: 0.6rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    button {
+    header {
       background-color: #002060;
       color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
     }
 
-    button:hover {
-      background-color: #0033a0;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
     }
 
-    .toggle-section {
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .toggle-section a {
-      color: #002060;
-      cursor: pointer;
+    nav a {
+      color: white;
+      text-decoration: none;
       font-weight: bold;
+    }
+
+    nav a:hover {
       text-decoration: underline;
+    }
+
+    .hero {
+      background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+      height: auto;
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+
+    .hero-gallery {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0;
+    }
+
+    .hero-gallery li {
+      width: 400px;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .hero-gallery li img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .main-content {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .main-content h2 {
+      color: #002060;
+      margin-bottom: 1rem;
+    }
+
+    .main-content p {
+      font-size: 1.1rem;
+    }
+
+    #footer-container {
+      height: 100px;
+    }
+
+    footer {
+      background-color: #002060;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- แบบฟอร์มเข้าสู่ระบบ -->
-  <div class="container" id="loginForm">
-    <h2>เข้าสู่ระบบ</h2>
-    <form>
-      <label for="email">อีเมล</label>
-      <input type="email" id="email" placeholder="กรอกอีเมล" required />
+  <header>
+    <div><strong>เว็บไซต์ของแคท</strong></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="#about">เกี่ยวกับ</a></li>
+        <li><a href="product.html">สินค้า</a></li>
+        <li><a href="#contact">ติดต่อ</a></li>
+        <li><a href="login.html">เข้าสู่ระบบ</a></li>
+      </ul>
+    </nav>
+  </header>
+  
 
-      <label for="password">รหัสผ่าน</label>
-      <input type="password" id="password" placeholder="กรอกรหัสผ่าน" required />
+  <section class="hero">
+    ยินดีต้อนรับสู่เว็บไซต์ของแคท
+    <ul class="hero-gallery">
+      <li><img src="https://external-preview.redd.it/Z3AoSYd0lMvins0SV_gt99qHbu2nLTkUGh5CMBhy28E.jpg?auto=webp&s=7ff397141e46f77d97fcf80354d99c885b21a0f5
+        " alt="แบนเนอร์ 1"></li>
+      <li><img src="https://www.sony.co.th/image/bc6d25fa6371c2899ce704a2bed7614c?fmt=png-alpha&wid=960" alt="แบนเนอร์ 2"></li>
+      <li><img src="https://as2.ftcdn.net/jpg/04/27/16/05/1000_F_427160582_w0D5Z01pVaz32w7JzzNWTtE2n1VvvKmi.jpg" alt="แบนเนอร์ 3"></li>
+    </ul>
+  </section>
 
-      <button type="submit">เข้าสู่ระบบ</button>
-    </form>
-    <div class="toggle-section">
-      ยังไม่มีบัญชี? <a onclick="toggleForm()">สมัครสมาชิก</a>
-    </div>
-  </div>
+  <section class="main-content" id="about">
+    <h2>เกี่ยวกับเรา</h2>
+    <p>ที่นี่เราจำหน่ายอุปกรณ์และเครื่องมือช่างคุณภาพ เช่น สว่านไฟฟ้า เครื่องมือไฟฟ้า และสินค้าต่าง ๆ อีกมากมายในราคายุติธรรม พร้อมบริการหลังการขายจากทีมงานมืออาชีพ</p>
+  </section>
 
-  <!-- แบบฟอร์มสมัครสมาชิก -->
-  <div class="container" id="registerForm" style="display: none;">
-    <h2>สมัครสมาชิก</h2>
-    <form id="register-form" onsubmit="submitForm(event)">
-      <label for="fname">ชื่อ</label>
-      <input type="text" id="fname" placeholder="กรอกชื่อ" required />
+  <section class="promotions main-content">
+    <h2>โปรโมชั่นพิเศษ</h2>
+    <p>ซื้อสินค้าครบ 5,000 บาท ส่งฟรีทั่วประเทศ!</p>
+  </section>
 
-      <label for="lname">นามสกุล</label>
-      <input type="text" id="lname" placeholder="กรอกนามสกุล" required />
+  <section class="news main-content">
+    <h2>ข่าวสารล่าสุด</h2>
+    <ul style="text-align: left; max-width: 700px; margin: 0 auto;">
+      <li>📢 เปิดตัวสินค้าใหม่เดือนนี้: สว่านไร้สายรุ่นพรีเมียม</li>
+      <li>📅 แคทจะไลฟ์สดแนะนำสินค้า ทุกวันศุกร์ เวลา 20:00 น.</li>
+      <li>🎁 แจกคูปองส่วนลดพิเศษทุกวันอาทิตย์!</li>
+    </ul>
+  </section>
 
-      <label for="phone">เบอร์โทร</label>
-      <input type="tel" id="phone" placeholder="กรอกเบอร์โทรศัพท์" required />
+  <section class="testimonials main-content">
+    <h2>รีวิวจากลูกค้า</h2>
+    <blockquote style="font-style: italic; color: #555;">“สินค้าคุณภาพดี ส่งเร็วมาก แม่ค้าใจดีสุด ๆ เลยค่ะ” – คุณก้อย</blockquote>
+    <blockquote style="font-style: italic; color: #555;">“ใช้แล้วทนทาน แข็งแรง บริการหลังการขายดีมากครับ” – คุณต่อ</blockquote>
+  </section>
 
-      <label for="regEmail">อีเมล</label>
-      <input type="email" id="regEmail" placeholder="กรอกอีเมล" required />
+  <section class="contact-info main-content" id="contact">
+    <h2>ติดต่อเรา</h2>
+    <p>โทร: 08X-XXX-XXXX | อีเมล: katshop@example.com</p>
+    <p>Facebook: facebook.com/katshop | Line: @kattools</p>
+  </section>
 
-      <label for="username">ชื่อผู้ใช้งาน</label>
-      <input type="text" id="username" placeholder="ตั้งชื่อผู้ใช้" required />
+  <div id="footer-container"></div>
 
-      <label for="regPassword">รหัสผ่าน</label>
-      <input type="password" id="regPassword" placeholder="ตั้งรหัสผ่าน" required />
+  <footer id="footer">
+    &copy; 2025 เว็บไซต์ของแคท - สงวนลิขสิทธิ์
+  </footer>
 
-      <button type="submit">สมัครสมาชิก</button>
-    </form>
-    <div class="toggle-section">
-      มีบัญชีแล้ว? <a onclick="toggleForm()">เข้าสู่ระบบ</a>
-    </div>
-  </div>
-
-  <!-- JavaScript -->
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwmd4hK6kErmb8wP4zxz3lFuegOhmbyBJZ9n4A8SdUZrFTR9frU7Sb3v2yCUKG3PY1_Ew/exec';
-  
-    function toggleForm() {
-      const login = document.getElementById('loginForm');
-      const register = document.getElementById('registerForm');
-      login.style.display = login.style.display === 'none' ? 'block' : 'none';
-      register.style.display = register.style.display === 'none' ? 'block' : 'none';
-    }
-  
-    function submitForm(event) {
-      event.preventDefault();
-      const data = {
-        fname: document.getElementById("fname").value,
-        lname: document.getElementById("lname").value,
-        phone: document.getElementById("phone").value,
-        email: document.getElementById("regEmail").value,
-        username: document.getElementById("username").value,
-        password: document.getElementById("regPassword").value
-      };
-  
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(response => {
-        alert("✅ สมัครสมาชิกเรียบร้อยแล้ว!");
-        document.querySelector("#registerForm form").reset();
-        toggleForm();
-      })
-      .catch(error => {
-        console.error("❌ เกิดข้อผิดพลาด:", error);
-        alert("❌ ไม่สามารถส่งข้อมูลได้");
-      });
-    }
+    window.addEventListener("scroll", () => {
+      const footer = document.getElementById("footer");
+      const container = document.getElementById("footer-container");
+      const containerTop = container.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (containerTop <= windowHeight) {
+        footer.style.display = "block";
+      } else {
+        footer.style.display = "none";
+      }
+    });
   </script>
+
   
 
 </body>

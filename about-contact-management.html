@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แก้ไข เกี่ยวกับ/ติดต่อ - แอดมิน</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #f0f0f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #002060;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .admin-status {
+      background-color: #00c853;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    h2 {
+      color: #002060;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+    .form-container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    .form-container input, .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .form-container button {
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .btn-back {
+      background-color: #607d8b;
+    }
+    .btn-submit {
+      background-color: #4CAF50;
+    }
+    .checkbox { margin: 0 10px; }
+    .btn-back-fixed {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      background-color: #607d8b;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>เว็บไซต์ของแคท</strong>
+    <div class="admin-status">🟢 <span id="adminUser">กำลังโหลด...</span></div>
+  </header>
+
+  <div class="container">
+    <h2>✏️ แก้ไข เกี่ยวกับ/ติดต่อ</h2>
+    <div class="form-container">
+      <label for="aboutContent">เกี่ยวกับ:</label>
+      <textarea id="aboutContent" rows="5" placeholder="กรอกข้อมูลเกี่ยวกับเว็บไซต์..." required></textarea>
+      
+      <label for="contactInfo">ข้อมูลติดต่อ:</label>
+      <textarea id="contactInfo" rows="5" placeholder="กรอกข้อมูลติดต่อ..." required></textarea>
+
+      <button class="btn-submit" onclick="saveAboutContact()">บันทึก</button>
+      <button class="btn-back" onclick="goBack()">กลับ</button>
+    </div>
+  </div>
+
+  <!-- ปุ่มลอยที่ด้านล่างซ้าย -->
+  <button class="btn-back-fixed" onclick="goBack()">⬅️ กลับหน้าหลัก</button>
+
+  <script>
+    const sheetURL = "https://script.google.com/macros/s/AKfycbz35pjSs9yikYSIqxvDXn99B-zJwVk8EiwG_dJ3WaidnBI_L33qvvxFOOtEzmAfcfAd7A/exec";
+    
+    const adminName = localStorage.getItem("userName") || "Unknown";
+    const role = localStorage.getItem("userRole");
+
+    if (role !== "admin") {
+      alert("หน้านี้สำหรับแอดมินเท่านั้น");
+      window.location.href = "index.html";
+    }
+
+    document.getElementById("adminUser").textContent = adminName;
+
+    // ฟังก์ชันบันทึกข้อมูล
+    async function saveAboutContact() {
+      const aboutContent = document.getElementById("aboutContent").value;
+      const contactInfo = document.getElementById("contactInfo").value;
+
+      const formData = new URLSearchParams();
+      formData.append("action", "update_about_contact");
+      formData.append("about_content", aboutContent);
+      formData.append("contact_info", contactInfo);
+
+      try {
+        const response = await fetch(sheetURL, {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.text();
+        console.log("Response:", result);
+        alert("✅ ข้อมูลเกี่ยวกับ/ติดต่อถูกบันทึกแล้ว");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    function goBack() {
+      window.location.href = "admin.html";
+    }
+  </script>
+</body>
+</html>

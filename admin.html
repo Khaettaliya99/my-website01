@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แผงควบคุมแอดมิน</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f0f0f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #002060;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-status {
+      background-color: #00c853;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .dashboard {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .dashboard h2 {
+      color: #002060;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .dashboard p {
+      margin: 0.5rem 0;
+    }
+
+    .role-badge {
+      display: inline-block;
+      background-color: #28a745;
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .logout-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .card-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      max-width: 1000px;
+      margin-inline: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 160px;
+      height: 160px;
+      text-align: center;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card-title {
+      font-weight: bold;
+      margin-top: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <strong>เว็บไซต์ของแคท</strong>
+    <div class="admin-status">🟢 <span id="adminUser">-</span></div>
+  </header>
+
+  <div class="dashboard">
+    <h2>👩‍💼 ยินดีต้อนรับแอดมิน</h2>
+    <p>ชื่อผู้ใช้: <strong id="adminName">-</strong></p>
+    <div class="role-badge">สิทธิ์: ผู้ดูแลระบบ (admin)</div>
+    <button class="logout-btn" onclick="logout()">ออกจากระบบ</button>
+  </div>
+
+   <!---ปุ่มเมนูหน้าแอดมิน---------------------------------------------------------------------------------------------------------------->
+
+  <div class="card-grid">
+    <div class="card">
+        <a href="about-contact-management.html" style="display: block; text-decoration: none; color: inherit;">
+          <div>ไอคอนสวยๆ</div>
+          <div class="card-title">เกี่ยวกับ/ติดต่อ</div>
+        </a>
+      </div>
+
+    <div class="card">
+        <a href="" style="display: block; text-decoration: none; color: inherit;">
+          <div>ไอคอนสวยๆ</div>
+          <div class="card-title">ประกาศ/โปรโมชั่น</div>
+        </a>
+      </div>
+    
+    <div class="card">
+        <a href="product-management.html" style="display: block; text-decoration: none; color: inherit;">
+          <div>ไอคอนสวยๆ</div>
+          <div class="card-title">เพิ่ม/แก้ไขสินค้า</div>
+        </a>
+      </div>
+      
+  <!------------------------------------------------------------------------------------------------------------------->
+
+    <div class="card"><div>ไอคอนสวยๆ</div><div class="card-title">ประวัติการล็อกอิน</div></div>
+    <div class="card"><div>ไอคอนสวยๆ</div><div class="card-title">ประวัติการสั่งซื้อ</div></div>
+  </div>
+  <!-------------------------------------------------------------------------------------------------------------------->
+  <script>
+    const name = localStorage.getItem("userName");
+    const role = localStorage.getItem("userRole");
+
+    if (role !== "admin") {
+      alert("หน้านี้สำหรับแอดมินเท่านั้น");
+      window.location.href = "index.html";
+    } else {
+      document.getElementById("adminName").textContent = name;
+      document.getElementById("adminUser").textContent = name;
+    }
+
+    function logout() {
+      // log logout if needed (ส่งไป Apps Script)
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
