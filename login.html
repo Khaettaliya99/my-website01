@@ -12,7 +12,6 @@
       margin: 0;
       padding: 0;
     }
-
     .container {
       max-width: 500px;
       margin: 4rem auto;
@@ -21,31 +20,26 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
-
     h2 {
       text-align: center;
       color: #002060;
       margin-bottom: 1.5rem;
     }
-
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-
     label {
       font-weight: bold;
       color: #333;
     }
-
     input {
       padding: 0.6rem;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 1rem;
     }
-
     button {
       background-color: #002060;
       color: white;
@@ -56,23 +50,19 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-
     button:hover {
       background-color: #0033a0;
     }
-
     .toggle-section {
       text-align: center;
       margin-top: 1rem;
     }
-
     .toggle-section a {
       color: #002060;
       cursor: pointer;
       font-weight: bold;
       text-decoration: underline;
     }
-
     #message {
       text-align: center;
       margin-top: 1rem;
@@ -82,8 +72,6 @@
   </style>
 </head>
 <body>
-
-  <!-- แบบฟอร์มเข้าสู่ระบบ -------------------------------------------------------------------------------------------------->
   <div class="container" id="loginForm">
     <h2>เข้าสู่ระบบ</h2>
     <form onsubmit="login(event)">
@@ -100,7 +88,6 @@
     </div>
   </div>
 
-  <!-- แบบฟอร์มสมัครสมาชิก ------------------------------------------------------------------------------------------------>
   <div class="container" id="registerForm" style="display: none;">
     <h2>สมัครสมาชิก</h2>
     <form id="register-form">
@@ -133,23 +120,9 @@
     </div>
   </div>
 
-  <!-- 🔵 ปุ่มกลับหน้าแรกแบบสวย ------------------------------------------------------------------------------------------------>
   <div style="text-align: center; margin-top: 2rem;">
-    <a href="index.html" style="
-      display: inline-block;
-      background-color: #ccc;
-      color: #002060;
-      padding: 0.7rem 1.5rem;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    " onmouseover="this.style.backgroundColor='#bbb'" onmouseout="this.style.backgroundColor='#ccc'">
-      ← กลับหน้าแรก
-    </a>
+    <a href="index.html" style="display: inline-block; background-color: #ccc; color: #002060; padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#bbb'" onmouseout="this.style.backgroundColor='#ccc'">← กลับหน้าแรก</a>
   </div>
-</div>
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbzTldMDX4e_Bc-yAIcniw0vZIm4qUThrb13y4g7Cuvc7FFnLOFJq4Q8BHF9VlU5YG5a/exec";
@@ -162,33 +135,23 @@
       document.getElementById('message').textContent = '';
     }
 
-    // ✅ สมัครสมาชิก -------------------------------------------------------------------------------------------------------------
     const form = document.getElementById("register-form");
     const msg = document.getElementById("message");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const password = document.getElementById("regPassword").value;
       const confirm = document.getElementById("confirm").value;
-
       if (password !== confirm) {
         msg.style.color = "red";
         msg.textContent = "❌ รหัสผ่านไม่ตรงกัน";
         return;
       }
-
       const formData = new FormData(form);
       formData.append("action", "register");
-
-      const response = await fetch(scriptURL, {
-        method: "POST",
-        body: formData
-      });
-
+      const response = await fetch(scriptURL, { method: "POST", body: formData });
       const result = await response.text();
       msg.style.color = result === "success" ? "green" : "red";
-
       if (result === "success") {
         msg.textContent = "✅ สมัครสมาชิกเรียบร้อยแล้ว!";
         form.reset();
@@ -199,49 +162,48 @@
       }
     });
 
-
-    // ✅ ล็อกอินแอดมินจากรหัสที่กำหนดใน Code ------------------------------------------------------------------------------------
-    function login(e) {
+    async function login(e) {
       e.preventDefault();
-
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
-      // ✅ รายชื่อแอดมินที่อนุญาต (เพิ่ม/แก้ตรงนี้ได้)----------------------------------------------------------------------------------
-      const adminAccounts = [
-        { email: "admin01@example.com", password: "123456", name: "Admin แคท" },
-        { email: "devcraft.sitebuilder07@gmail.com", password: "888888", name: "หัวหน้าใหญ่" }
+      const formData = new URLSearchParams();
+      formData.append("action", "login");
+      formData.append("email", email);
+      formData.append("password", password);
 
-        // ✅ ----------------------------------------------------------------------------------------------------------------)
-      ];
+      const response = await fetch(scriptURL, { method: "POST", body: formData });
+      const result = await response.text();
 
-      const matchedAdmin = adminAccounts.find(admin =>
-        admin.email === email && admin.password === password
-      );
+      try {
+        const data = JSON.parse(result);
+        if (data.email) {
+          localStorage.setItem("userEmail", data.email);
+          localStorage.setItem("userName", data.username);
+          localStorage.setItem("userRole", data.role);
 
-      if (matchedAdmin) {
-        // ✅ เก็บลง localStorage
-        localStorage.setItem("userEmail", email);
-        localStorage.setItem("userRole", "admin");
-        localStorage.setItem("userName", matchedAdmin.name);
+          fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams({
+              action: "log_login",
+              email: data.email,
+              name: data.username,
+              role: data.role
+            })
+          });
 
-        // ✅ บันทึกลง Google Sheet
-        fetch(scriptURL, {
-          method: "POST",
-          body: new URLSearchParams({
-            action: "log_login",
-            email: email,
-            name: matchedAdmin.name,
-            role: "admin"
-          })
-        });
-
-        window.location.href = "admin.html";
-      } else {
+          if (data.role === "admin") {
+            window.location.href = "admin.html";
+          } else {
+            window.location.href = "user-home.html";
+          }
+        } else {
+          alert("❌ อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+        }
+      } catch (error) {
         alert("❌ อีเมลหรือรหัสผ่านไม่ถูกต้อง");
       }
     }
   </script>
-
 </body>
 </html>
